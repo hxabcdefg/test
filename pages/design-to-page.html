@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>详细教学：把设计稿内容整理成可开发页面</title>
+    <meta name="description" content="把设计稿拆成开发能看懂的页面说明、素材清单和交互规则。" />
+    <link rel="stylesheet" href="../styles.css?v=20260617-v3" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">教</span>
+        <span>实战教学站</span>
+      </a>
+      <nav class="site-nav" aria-label="详情页导航">
+        <a href="../index.html#cases">返回用例库</a>
+        <a href="#steps">操作步骤</a>
+        <a href="#template">示例模板</a>
+      </nav>
+      <a class="header-action" href="../index.html#cases">换一个用例</a>
+    </header>
+
+    <main class="lesson">
+      <section class="lesson-hero">
+        <p class="eyebrow">网页制作 · 详细教学</p>
+        <h1>把设计稿内容整理成可开发页面</h1>
+        <p>
+          真实场景：你手里有一张设计稿，但开发同学问“按钮点了去哪、图片从哪来、手机端怎么排”。
+          这篇教程帮你把设计稿变成清楚的开发说明。
+        </p>
+      </section>
+
+      <section class="lesson-layout">
+        <aside class="lesson-sidebar">
+          <h2>适合谁</h2>
+          <ul>
+            <li>设计师：交付更清楚</li>
+            <li>产品：减少反复沟通</li>
+            <li>前端新手：知道该问什么</li>
+          </ul>
+        </aside>
+
+        <div class="lesson-content">
+          <section class="lesson-block">
+            <h2>一、先不要看颜色，先看区域</h2>
+            <p>把页面从上到下分成几个区域，每个区域只回答三个问题：它叫什么、展示什么、用户能做什么。</p>
+            <div class="example-box">
+              <p><strong>区域 1：顶部导航。</strong> 展示 logo、导航入口、登录按钮。</p>
+              <p><strong>区域 2：首屏介绍。</strong> 展示一句主标题、说明文字、立即体验按钮。</p>
+              <p><strong>区域 3：功能卡片。</strong> 展示 3 个核心功能，每个功能有标题和说明。</p>
+            </div>
+          </section>
+
+          <section class="lesson-block" id="steps">
+            <h2>二、整理给开发的 5 类信息</h2>
+            <ol class="step-list">
+              <li>
+                <h3>文字内容</h3>
+                <p>把所有标题、说明、按钮文字单独列出来，避免开发从截图里猜。</p>
+              </li>
+              <li>
+                <h3>图片素材</h3>
+                <p>写清楚图片文件名、尺寸、是否需要压缩、是否有替换图。</p>
+              </li>
+              <li>
+                <h3>按钮跳转</h3>
+                <p>每个按钮写清楚跳转页面，例如：点击“立即体验”跳到注册页。</p>
+              </li>
+              <li>
+                <h3>状态变化</h3>
+                <p>比如鼠标移上去是否变色、表单错误时提示什么、加载中显示什么。</p>
+              </li>
+              <li>
+                <h3>手机端规则</h3>
+                <p>写清楚卡片是一列展示，还是横向滑动；导航是否折叠。</p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="lesson-block" id="template">
+            <h2>三、开发说明模板</h2>
+            <div class="copy-box">
+              <button class="copy-button" type="button" data-copy-target="design-copy">复制模板</button>
+              <pre id="design-copy">页面名称：首页
+区域：首屏介绍
+展示内容：
+- 主标题：让新用户 5 分钟完成上手
+- 副标题：提供模板、示例和任务清单
+- 按钮：免费开始
+按钮跳转：/signup
+图片素材：hero-preview.png
+手机端规则：标题居中，图片放到文字下方，按钮占满宽度</pre>
+            </div>
+          </section>
+
+          <section class="lesson-block">
+            <h2>四、常见错误</h2>
+            <ul class="check-list">
+              <li>只发截图，不给文字和素材。</li>
+              <li>按钮没有说明点击后去哪。</li>
+              <li>只考虑电脑端，没有手机端规则。</li>
+              <li>没有说明错误提示、空数据、加载中状态。</li>
+            </ul>
+          </section>
+
+          <nav class="lesson-next">
+            <a href="./refund-troubleshooting.html">下一篇：用户退款失败怎么排查 →</a>
+          </nav>
+        </div>
+      </section>
+    </main>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

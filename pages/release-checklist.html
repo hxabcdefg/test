@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>详细教学：上线前写一份人人能用的测试清单</title>
+    <meta name="description" content="把上线前检查拆成登录、按钮、表单、手机端、异常提示等可执行项目。" />
+    <link rel="stylesheet" href="../styles.css?v=20260617-v3" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">教</span>
+        <span>实战教学站</span>
+      </a>
+      <nav class="site-nav" aria-label="详情页导航">
+        <a href="../index.html#cases">返回用例库</a>
+        <a href="#steps">检查步骤</a>
+        <a href="#template">清单模板</a>
+      </nav>
+      <a class="header-action" href="../index.html#cases">换一个用例</a>
+    </header>
+
+    <main class="lesson">
+      <section class="lesson-hero">
+        <p class="eyebrow">质量检查 · 详细教学</p>
+        <h1>上线前写一份人人能用的测试清单</h1>
+        <p>
+          真实场景：功能马上要上线，大家都说“看一下有没有问题”。但如果没有清单，
+          很容易只看页面好不好看，漏掉按钮、异常提示和手机端问题。
+        </p>
+      </section>
+
+      <section class="lesson-layout">
+        <aside class="lesson-sidebar">
+          <h2>适合检查</h2>
+          <ul>
+            <li>活动页面</li>
+            <li>注册登录</li>
+            <li>订单支付</li>
+            <li>表单提交</li>
+            <li>后台配置</li>
+          </ul>
+        </aside>
+
+        <div class="lesson-content">
+          <section class="lesson-block">
+            <h2>一、测试清单不是越长越好</h2>
+            <p>好的清单要让别人照着就能检查，而且每一项都能判断“通过”或“不通过”。</p>
+            <div class="example-box">
+              <p><strong>不清楚：</strong> 检查页面是否正常。</p>
+              <p><strong>更清楚：</strong> 未登录用户点击“立即购买”后，是否跳转到登录页。</p>
+            </div>
+          </section>
+
+          <section class="lesson-block" id="steps">
+            <h2>二、按 6 类情况写测试项</h2>
+            <ol class="step-list">
+              <li>
+                <h3>正常流程</h3>
+                <p>用户按预期操作时，是否能从开始走到完成。</p>
+              </li>
+              <li>
+                <h3>按钮和跳转</h3>
+                <p>每个按钮是否能点击，点击后是否去到正确页面。</p>
+              </li>
+              <li>
+                <h3>表单输入</h3>
+                <p>手机号、邮箱、验证码、必填项、字数限制是否有提示。</p>
+              </li>
+              <li>
+                <h3>异常情况</h3>
+                <p>网络失败、库存不足、优惠券过期、重复提交时是否有说明。</p>
+              </li>
+              <li>
+                <h3>权限和登录</h3>
+                <p>未登录、普通用户、管理员看到的内容是否不同。</p>
+              </li>
+              <li>
+                <h3>手机端体验</h3>
+                <p>小屏幕下文字是否被挤压，按钮是否容易点击。</p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="lesson-block" id="template">
+            <h2>三、测试清单模板</h2>
+            <div class="copy-box">
+              <button class="copy-button" type="button" data-copy-target="release-copy">复制模板</button>
+              <pre id="release-copy">功能名称：会员活动页
+测试人：
+测试时间：
+
+1. 未登录用户点击“立即领取”是否跳转登录页：通过 / 不通过
+2. 已登录用户点击“立即领取”是否成功领取优惠：通过 / 不通过
+3. 优惠已领取时是否显示“已领取”：通过 / 不通过
+4. 活动结束后按钮是否不可点击并提示结束：通过 / 不通过
+5. 手机端 375px 宽度下文字是否完整显示：通过 / 不通过
+6. 网络失败时是否显示重试提示：通过 / 不通过
+
+发现的问题：
+负责人：
+修复状态：</pre>
+            </div>
+          </section>
+
+          <section class="lesson-block">
+            <h2>四、上线前最后确认</h2>
+            <ul class="check-list">
+              <li>每个“不通过”都有截图或录屏。</li>
+              <li>每个问题都有负责人。</li>
+              <li>修复后要重新检查，不要只听口头确认。</li>
+              <li>上线后保留清单，方便复盘。</li>
+            </ul>
+          </section>
+
+          <nav class="lesson-next">
+            <a href="../index.html#cases">回到用例库，继续学习其他场景 →</a>
+          </nav>
+        </div>
+      </section>
+    </main>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
