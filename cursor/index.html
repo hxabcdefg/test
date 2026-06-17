@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 编程工具实战教学 · Cursor / Claude Code / Codex</title>
+  <meta name="description" content="手把手教你从零上手 Cursor、Claude Code 和 OpenAI Codex 三大 AI 编程工具。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- 移动端顶栏 -->
+  <header class="topbar">
+    <button id="menuToggle" class="icon-btn" aria-label="菜单">☰</button>
+    <span class="topbar-title">AI 编程教学</span>
+    <button id="themeToggleMobile" class="icon-btn" aria-label="切换主题">🌙</button>
+  </header>
+
+  <div class="layout">
+    <!-- 侧边栏 -->
+    <aside id="sidebar" class="sidebar">
+      <div class="brand">
+        <div class="brand-logo">⌘</div>
+        <div class="brand-text">
+          <strong>AI 编程实战</strong>
+          <span>Cursor · Claude Code · Codex</span>
+        </div>
+      </div>
+
+      <div class="search-box">
+        <input id="searchInput" type="search" placeholder="搜索课程…" autocomplete="off" />
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span>学习进度</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+      </div>
+
+      <nav id="nav" class="nav"></nav>
+
+      <div class="sidebar-footer">
+        <button id="themeToggle" class="theme-btn">🌙 切换主题</button>
+        <button id="resetProgress" class="reset-btn">重置进度</button>
+      </div>
+    </aside>
+
+    <div id="overlay" class="overlay"></div>
+
+    <!-- 主内容 -->
+    <main class="content">
+      <article id="lesson" class="lesson"></article>
+      <div class="lesson-nav">
+        <button id="prevBtn" class="lesson-nav-btn">← 上一课</button>
+        <button id="markBtn" class="mark-btn">标记本课完成</button>
+        <button id="nextBtn" class="lesson-nav-btn">下一课 →</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="content.js"></script>
+  <script src="lessons-start.js"></script>
+  <script src="lessons-tools.js"></script>
+  <script src="lessons-work.js"></script>
+  <script src="lessons-life.js"></script>
+  <script src="lessons-advanced.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
