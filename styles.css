@@ -95,6 +95,12 @@ button {
   text-align: center;
 }
 
+.version-notice a {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 p,
 h1,
 h2,

@@ -4,7 +4,15 @@
 
 ## 本地预览
 
-直接用浏览器打开 `index.html`，或者启动本地服务：
+如果你之前打开页面看到的是白底默认文字，请先直接打开：
+
+```text
+preview.html
+```
+
+`preview.html` 是单文件预览版，所有首页样式都写在文件内部，不依赖外部 CSS。
+
+正式多页版本可以打开 `index.html`，或者启动本地服务：
 
 ```bash
 python3 -m http.server 8080
@@ -18,6 +26,7 @@ http://localhost:8080
 
 ## 页面结构
 
+- `preview.html`：单文件预览版，用来确认新版视觉是否正常显示。
 - `index.html`：真实用例入口、分类筛选、学习路径、使用说明。
 - `pages/landing-page.html`：从一句需求做出活动落地页。
 - `pages/design-to-page.html`：把设计稿内容整理成可开发页面。

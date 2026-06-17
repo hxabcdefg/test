@@ -3,26 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>实战教学站 | 从真实用例开始学习</title>
-    <meta
-      name="description"
-      content="一个以真实业务用例为入口的多页教学网站。每个卡片都能跳转到详细教程，包含场景、步骤、示例和检查清单。"
-    />
+    <title>实战教学站 · 单文件预览版</title>
+    <meta name="description" content="不依赖外部 CSS 的单文件预览页，打开即可看到新版视觉效果。" />
     <style>
-      :root {
-        color-scheme: dark;
-        --bg: #070a16;
-        --card: rgba(255, 255, 255, 0.08);
-        --card-strong: rgba(255, 255, 255, 0.13);
-        --line: rgba(255, 255, 255, 0.14);
-        --text: #f7f9ff;
-        --muted: #a7b0ca;
-        --blue: #38bdf8;
-        --purple: #8b5cf6;
-        --green: #34d399;
-        --container: 1180px;
-      }
-
       * {
         box-sizing: border-box;
       }
@@ -34,10 +17,10 @@
       body {
         min-width: 320px;
         margin: 0;
-        color: var(--text);
+        color: #f7f9ff;
         background:
-          radial-gradient(circle at 12% 8%, rgba(56, 189, 248, 0.2), transparent 28rem),
-          radial-gradient(circle at 78% 0%, rgba(139, 92, 246, 0.3), transparent 30rem),
+          radial-gradient(circle at 12% 8%, rgba(56, 189, 248, 0.22), transparent 28rem),
+          radial-gradient(circle at 78% 0%, rgba(139, 92, 246, 0.34), transparent 30rem),
           linear-gradient(135deg, #060817 0%, #0a0f20 52%, #111827 100%);
         font-family:
           "PingFang SC",
@@ -70,41 +53,35 @@
         font: inherit;
       }
 
-      p,
       h1,
       h2,
-      h3 {
+      h3,
+      p {
         margin-top: 0;
       }
 
-      .version-notice,
-      .site-header,
+      .notice,
+      .header,
       .hero,
       .section,
-      .site-footer {
-        width: min(100% - 40px, var(--container));
+      .footer {
+        width: min(100% - 40px, 1180px);
         margin-inline: auto;
       }
 
-      .version-notice {
+      .notice {
         margin-top: 14px;
-        padding: 12px 18px;
+        padding: 14px 18px;
         border: 1px solid rgba(52, 211, 153, 0.42);
         border-radius: 999px;
         color: #d1fae5;
         background: rgba(16, 185, 129, 0.18);
         font-size: 14px;
-        font-weight: 800;
+        font-weight: 900;
         text-align: center;
       }
 
-      .version-notice a {
-        color: #ffffff;
-        text-decoration: underline;
-        text-underline-offset: 4px;
-      }
-
-      .site-header {
+      .header {
         position: sticky;
         top: 16px;
         z-index: 20;
@@ -114,7 +91,7 @@
         gap: 18px;
         margin-top: 14px;
         padding: 12px 14px 12px 18px;
-        border: 1px solid var(--line);
+        border: 1px solid rgba(255, 255, 255, 0.14);
         border-radius: 999px;
         background: rgba(7, 10, 22, 0.78);
         box-shadow: 0 14px 48px rgba(0, 0, 0, 0.26);
@@ -122,10 +99,9 @@
       }
 
       .brand,
-      .site-nav,
-      .hero-actions,
-      .filter-tabs,
-      .site-footer {
+      .nav,
+      .actions,
+      .filters {
         display: flex;
         align-items: center;
       }
@@ -135,70 +111,51 @@
         font-weight: 900;
       }
 
-      .brand-mark {
+      .brand span:first-child {
         display: grid;
         width: 38px;
         height: 38px;
         place-items: center;
         border-radius: 14px;
-        background: linear-gradient(135deg, var(--blue), var(--purple));
+        background: linear-gradient(135deg, #38bdf8, #8b5cf6);
       }
 
-      .site-nav {
-        gap: 26px;
+      .nav {
+        gap: 24px;
         color: #d6dcf0;
         font-size: 14px;
       }
 
-      .header-action,
-      .primary-btn,
-      .secondary-btn,
+      .header-link,
+      .primary,
+      .secondary,
       .card-link {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         border-radius: 999px;
-        font-weight: 800;
+        font-weight: 900;
       }
 
-      .header-action {
+      .header-link {
         min-height: 38px;
         padding: 0 16px;
         background: rgba(56, 189, 248, 0.16);
         color: #cff4ff;
       }
 
-      .primary-btn,
-      .secondary-btn {
-        min-height: 48px;
-        padding: 0 22px;
-      }
-
-      .primary-btn {
-        background: linear-gradient(135deg, var(--blue), var(--purple));
-        color: white;
-        box-shadow: 0 20px 48px rgba(56, 189, 248, 0.24);
-      }
-
-      .secondary-btn {
-        border: 1px solid var(--line);
-        color: #d6dcf0;
-        background: rgba(255, 255, 255, 0.07);
-      }
-
       .hero {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(360px, 0.78fr);
+        grid-template-columns: minmax(0, 1fr) minmax(340px, 0.75fr);
         gap: 56px;
         align-items: center;
-        min-height: calc(100vh - 120px);
-        padding: 74px 0 96px;
+        padding: 74px 0 92px;
       }
 
       .eyebrow {
         display: inline-flex;
         margin-bottom: 18px;
-        color: var(--blue);
+        color: #38bdf8;
         font-size: 13px;
         font-weight: 900;
         letter-spacing: 0.12em;
@@ -225,66 +182,84 @@
         line-height: 1.32;
       }
 
-      .hero-lead,
-      .section-heading p,
-      .case-card p,
-      .path-list p,
-      .explain-grid p {
-        color: var(--muted);
+      .lead,
+      .section-head p,
+      .card p,
+      .step p,
+      .how p {
+        color: #a7b0ca;
         line-height: 1.82;
       }
 
-      .hero-lead {
+      .lead {
         max-width: 720px;
         font-size: 19px;
       }
 
-      .hero-actions {
+      .actions {
         gap: 14px;
         flex-wrap: wrap;
         margin-top: 34px;
       }
 
-      .board-window,
-      .case-card,
-      .path-list article,
-      .explain-grid article {
-        border: 1px solid var(--line);
-        background: var(--card);
+      .primary,
+      .secondary {
+        min-height: 48px;
+        padding: 0 22px;
+      }
+
+      .primary {
+        background: linear-gradient(135deg, #38bdf8, #8b5cf6);
+        color: white;
+        box-shadow: 0 20px 48px rgba(56, 189, 248, 0.24);
+      }
+
+      .secondary {
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        color: #d6dcf0;
+        background: rgba(255, 255, 255, 0.07);
+      }
+
+      .preview,
+      .card,
+      .step,
+      .how {
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.08);
         box-shadow:
           0 28px 90px rgba(0, 0, 0, 0.26),
           inset 0 1px 0 rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(14px);
       }
 
-      .board-window {
+      .preview {
         overflow: hidden;
         padding: 18px;
         border-radius: 36px;
       }
 
-      .window-bar {
+      .preview-bar {
         display: flex;
         gap: 8px;
         padding: 14px;
-        border: 1px solid var(--line);
+        border: 1px solid rgba(255, 255, 255, 0.14);
         border-radius: 18px;
         background: rgba(0, 0, 0, 0.22);
       }
 
-      .window-bar span {
+      .preview-bar span {
         width: 10px;
         height: 10px;
         border-radius: 50%;
         background: #fb7185;
       }
 
-      .window-bar span:nth-child(2) {
+      .preview-bar span:nth-child(2) {
         background: #fbbf24;
       }
 
-      .window-bar span:nth-child(3) {
-        background: var(--green);
+      .preview-bar span:nth-child(3) {
+        background: #34d399;
       }
 
       .preview-card {
@@ -296,7 +271,7 @@
 
       .preview-card small,
       .preview-card a,
-      .site-footer a {
+      .footer a {
         color: #7dd3fc;
         font-weight: 900;
       }
@@ -309,43 +284,43 @@
       }
 
       .section {
-        padding: 92px 0;
+        padding: 82px 0;
       }
 
-      .section-heading {
+      .section-head {
         max-width: 820px;
         margin-bottom: 34px;
       }
 
-      .filter-tabs {
+      .filters {
         gap: 12px;
         flex-wrap: wrap;
         margin-bottom: 28px;
       }
 
-      .filter-tab {
+      .filter {
         cursor: pointer;
         min-height: 40px;
         padding: 0 16px;
-        border: 1px solid var(--line);
+        border: 1px solid rgba(255, 255, 255, 0.14);
         border-radius: 999px;
         color: #d6dcf0;
         background: rgba(255, 255, 255, 0.07);
       }
 
-      .filter-tab.is-active {
+      .filter.active {
         border-color: rgba(56, 189, 248, 0.55);
         background: rgba(56, 189, 248, 0.18);
         color: white;
       }
 
-      .case-grid {
+      .grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 18px;
       }
 
-      .case-card {
+      .card {
         display: flex;
         min-height: 430px;
         flex-direction: column;
@@ -353,30 +328,30 @@
         border-radius: 24px;
       }
 
-      .case-card.is-hidden {
+      .card.hide {
         display: none;
       }
 
-      .case-number {
+      .num {
         display: grid;
         width: 42px;
         height: 42px;
         margin-bottom: 22px;
         place-items: center;
         border-radius: 14px;
-        color: var(--blue);
+        color: #38bdf8;
         font-weight: 900;
         background: rgba(56, 189, 248, 0.12);
       }
 
-      .case-type {
+      .type {
         margin-bottom: 8px;
-        color: var(--blue);
+        color: #38bdf8;
         font-size: 13px;
         font-weight: 900;
       }
 
-      .case-card ul {
+      .card ul {
         display: grid;
         gap: 8px;
         margin: 6px 0 24px;
@@ -393,44 +368,45 @@
         background: rgba(56, 189, 248, 0.12);
       }
 
-      .path-list,
-      .explain-grid {
+      .steps,
+      .how-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 18px;
       }
 
-      .explain-grid {
+      .how-grid {
         grid-template-columns: repeat(4, 1fr);
       }
 
-      .path-list article,
-      .explain-grid article {
+      .step,
+      .how {
         padding: 24px;
         border-radius: 24px;
       }
 
-      .path-list span {
+      .step span {
         display: grid;
         width: 44px;
         height: 44px;
         margin-bottom: 48px;
         place-items: center;
         border-radius: 15px;
-        color: var(--blue);
+        color: #38bdf8;
         font-weight: 900;
         background: rgba(56, 189, 248, 0.12);
       }
 
-      .site-footer {
+      .footer {
+        display: flex;
         justify-content: space-between;
         gap: 18px;
         padding: 46px 0 64px;
-        color: var(--muted);
+        color: #a7b0ca;
       }
 
       @media (max-width: 1040px) {
-        .site-nav {
+        .nav {
           display: none;
         }
 
@@ -438,23 +414,23 @@
           grid-template-columns: 1fr;
         }
 
-        .case-grid,
-        .path-list,
-        .explain-grid {
+        .grid,
+        .steps,
+        .how-grid {
           grid-template-columns: repeat(2, 1fr);
         }
       }
 
       @media (max-width: 720px) {
-        .version-notice,
-        .site-header,
+        .notice,
+        .header,
         .hero,
         .section,
-        .site-footer {
-          width: min(100% - 28px, var(--container));
+        .footer {
+          width: min(100% - 28px, 1180px);
         }
 
-        .header-action {
+        .header-link {
           display: none;
         }
 
@@ -467,106 +443,101 @@
           font-size: clamp(40px, 13vw, 58px);
         }
 
-        .hero-actions {
+        .actions {
           align-items: stretch;
           flex-direction: column;
         }
 
-        .hero-actions a,
-        .case-grid,
-        .path-list,
-        .explain-grid {
+        .actions a {
           width: 100%;
         }
 
-        .case-grid,
-        .path-list,
-        .explain-grid {
+        .grid,
+        .steps,
+        .how-grid {
           grid-template-columns: 1fr;
+        }
+
+        .footer {
+          align-items: flex-start;
+          flex-direction: column;
         }
       }
     </style>
-    <link rel="stylesheet" href="./styles.css?v=20260617-v3" />
   </head>
   <body>
-    <div class="version-notice">
-      当前应看到新版：实战教学站 v3 · 如果这里还是白底默认样式，请直接打开
-      <a href="./preview.html">preview.html 单文件预览版</a>
+    <div class="notice">
+      单文件预览版：如果你能看到深色背景、圆角卡片和蓝紫按钮，说明视觉样式已经生效。
     </div>
-    <header class="site-header">
-      <a class="brand" href="./index.html" aria-label="实战教学站首页">
-        <span class="brand-mark">教</span>
-        <span>实战教学站</span>
+
+    <header class="header">
+      <a class="brand" href="./preview.html">
+        <span>教</span>
+        <strong>实战教学站</strong>
       </a>
-      <nav class="site-nav" aria-label="主导航">
+      <nav class="nav" aria-label="主导航">
         <a href="#cases">真实用例</a>
         <a href="#path">学习路径</a>
-        <a href="#explain">怎么使用</a>
+        <a href="#how">怎么使用</a>
       </nav>
-      <a class="header-action" href="#cases">选择一个用例</a>
+      <a class="header-link" href="./index.html">返回 index.html</a>
     </header>
 
     <main>
-      <section class="hero" id="top">
-        <div class="hero-copy">
+      <section class="hero">
+        <div>
           <p class="eyebrow">不讲空话，直接照着做</p>
           <h1>把复杂概念拆成真实任务，一张卡片就是一个完整教学。</h1>
-          <p class="hero-lead">
-            之前的页面太像简介，也有很多看不懂的词。新版改成实战学习入口：
-            你先选择一个具体场景，点进去后会看到背景说明、准备材料、操作步骤、示例内容和最后检查清单。
+          <p class="lead">
+            这是单文件预览版，不依赖外部 CSS。你可以先用它确认新版设计已经存在：
+            首页负责选场景，点击卡片后进入独立详情页，详情页会讲背景、准备材料、操作步骤、示例模板和检查清单。
           </p>
-          <div class="hero-actions">
-            <a class="primary-btn" href="#cases">从真实用例开始</a>
-            <a class="secondary-btn" href="#explain">先看怎么用</a>
+          <div class="actions">
+            <a class="primary" href="#cases">从真实用例开始</a>
+            <a class="secondary" href="#how">先看怎么用</a>
           </div>
         </div>
 
-        <aside class="hero-board" aria-label="页面结构预览">
-          <div class="board-window">
-            <div class="window-bar">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <div class="preview-card">
-              <small>示例用例</small>
-              <h2>用户说“退款失败”，我该怎么排查？</h2>
-              <ol>
-                <li>先确认用户遇到的具体页面</li>
-                <li>再查看订单状态和退款记录</li>
-                <li>最后整理原因和回复话术</li>
-              </ol>
-              <a href="./pages/refund-troubleshooting.html">进入详细教学 →</a>
-            </div>
+        <aside class="preview">
+          <div class="preview-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="preview-card">
+            <small>示例用例</small>
+            <h2>用户说“退款失败”，我该怎么排查？</h2>
+            <ol>
+              <li>先确认用户遇到的具体页面</li>
+              <li>再查看订单状态和退款记录</li>
+              <li>最后整理原因和回复话术</li>
+            </ol>
+            <a href="./pages/refund-troubleshooting.html">进入详细教学 →</a>
           </div>
         </aside>
       </section>
 
-      <section class="section" id="cases" aria-labelledby="cases-title">
-        <div class="section-heading">
+      <section class="section" id="cases">
+        <div class="section-head">
           <p class="eyebrow">真实用例库</p>
-          <h2 id="cases-title">下面每一个卡片都可以点进去学，不再只是停留在一个页签里。</h2>
-          <p>
-            我把抽象能力改成普通人能理解的实际任务：做页面、查问题、整理客服反馈、做数据看板、写测试清单。
-          </p>
+          <h2>下面每一个卡片都可以点进去学，不再只是停留在一个页签里。</h2>
+          <p>我把抽象能力改成普通人能理解的实际任务：做页面、查问题、整理客服反馈、做数据看板、写测试清单。</p>
         </div>
 
-        <div class="filter-tabs" aria-label="用例分类筛选">
-          <button class="filter-tab is-active" type="button" data-filter="all">全部</button>
-          <button class="filter-tab" type="button" data-filter="website">网页制作</button>
-          <button class="filter-tab" type="button" data-filter="support">客服运营</button>
-          <button class="filter-tab" type="button" data-filter="data">数据分析</button>
-          <button class="filter-tab" type="button" data-filter="quality">质量检查</button>
+        <div class="filters" aria-label="用例分类筛选">
+          <button class="filter active" type="button" data-filter="all">全部</button>
+          <button class="filter" type="button" data-filter="website">网页制作</button>
+          <button class="filter" type="button" data-filter="support">客服运营</button>
+          <button class="filter" type="button" data-filter="data">数据分析</button>
+          <button class="filter" type="button" data-filter="quality">质量检查</button>
         </div>
 
-        <div class="case-grid">
-          <article class="case-card" data-category="website">
-            <div class="case-number">01</div>
-            <p class="case-type">网页制作</p>
+        <div class="grid">
+          <article class="card" data-category="website">
+            <div class="num">01</div>
+            <p class="type">网页制作</p>
             <h3>从一句需求做出一个活动落地页</h3>
-            <p>
-              适合完全不知道怎么开始的人。教程会带你把“我要做一个活动页”拆成标题、卖点、步骤、按钮和常见问题。
-            </p>
+            <p>把“我要做一个活动页”拆成标题、卖点、步骤、按钮和常见问题。</p>
             <ul>
               <li>最后产出：一个完整活动页结构</li>
               <li>适合人群：新手、运营、产品同学</li>
@@ -574,13 +545,11 @@
             <a class="card-link" href="./pages/landing-page.html">查看详细教学</a>
           </article>
 
-          <article class="case-card" data-category="website">
-            <div class="case-number">02</div>
-            <p class="case-type">网页制作</p>
+          <article class="card" data-category="website">
+            <div class="num">02</div>
+            <p class="type">网页制作</p>
             <h3>把设计稿内容整理成可开发页面</h3>
-            <p>
-              不要求你懂专业工具。教程会教你先看页面区域，再整理文字、图片、按钮和交互说明，交给开发也更清楚。
-            </p>
+            <p>先看页面区域，再整理文字、图片、按钮和交互说明，交给开发也更清楚。</p>
             <ul>
               <li>最后产出：页面拆解表和开发说明</li>
               <li>适合人群：设计、产品、前端新手</li>
@@ -588,13 +557,11 @@
             <a class="card-link" href="./pages/design-to-page.html">查看详细教学</a>
           </article>
 
-          <article class="case-card" data-category="support">
-            <div class="case-number">03</div>
-            <p class="case-type">客服运营</p>
+          <article class="card" data-category="support">
+            <div class="num">03</div>
+            <p class="type">客服运营</p>
             <h3>用户说“退款失败”，怎么一步步排查</h3>
-            <p>
-              用一个真实售后场景讲清楚：先问什么、查什么、怎么判断原因、最后怎么回复用户。
-            </p>
+            <p>用真实售后场景讲清楚：先问什么、查什么、怎么判断原因、最后怎么回复用户。</p>
             <ul>
               <li>最后产出：排查记录和客服回复</li>
               <li>适合人群：客服、运营、产品</li>
@@ -602,13 +569,11 @@
             <a class="card-link" href="./pages/refund-troubleshooting.html">查看详细教学</a>
           </article>
 
-          <article class="case-card" data-category="support">
-            <div class="case-number">04</div>
-            <p class="case-type">客服运营</p>
+          <article class="card" data-category="support">
+            <div class="num">04</div>
+            <p class="type">客服运营</p>
             <h3>把一堆用户反馈整理成优先级清单</h3>
-            <p>
-              当反馈太多时，教程会教你按“影响人数、严重程度、是否影响成交”来归类，最后得到可执行清单。
-            </p>
+            <p>按影响人数、严重程度、是否影响成交来归类，最后得到可执行清单。</p>
             <ul>
               <li>最后产出：反馈分类表和处理顺序</li>
               <li>适合人群：客服主管、运营、产品</li>
@@ -616,13 +581,11 @@
             <a class="card-link" href="./pages/feedback-priority.html">查看详细教学</a>
           </article>
 
-          <article class="case-card" data-category="data">
-            <div class="case-number">05</div>
-            <p class="case-type">数据分析</p>
+          <article class="card" data-category="data">
+            <div class="num">05</div>
+            <p class="type">数据分析</p>
             <h3>做一个看得懂的用户留存看板</h3>
-            <p>
-              不从术语开始，而是从问题开始：新用户第二天还会不会回来？教程会教你设计看板指标和解释方式。
-            </p>
+            <p>从问题开始：新用户第二天还会不会回来？再设计指标和解释方式。</p>
             <ul>
               <li>最后产出：留存看板字段和解读模板</li>
               <li>适合人群：运营、产品、数据新手</li>
@@ -630,13 +593,11 @@
             <a class="card-link" href="./pages/retention-dashboard.html">查看详细教学</a>
           </article>
 
-          <article class="case-card" data-category="quality">
-            <div class="case-number">06</div>
-            <p class="case-type">质量检查</p>
+          <article class="card" data-category="quality">
+            <div class="num">06</div>
+            <p class="type">质量检查</p>
             <h3>上线前写一份人人能用的测试清单</h3>
-            <p>
-              教你把“这个功能有没有问题”拆成登录、按钮、边界情况、手机端和异常提示，减少上线翻车。
-            </p>
+            <p>把“有没有问题”拆成登录、按钮、边界情况、手机端和异常提示。</p>
             <ul>
               <li>最后产出：上线前测试清单</li>
               <li>适合人群：产品、测试、开发、运营</li>
@@ -646,24 +607,23 @@
         </div>
       </section>
 
-      <section class="section path-section" id="path" aria-labelledby="path-title">
-        <div class="section-heading">
+      <section class="section" id="path">
+        <div class="section-head">
           <p class="eyebrow">建议学习路径</p>
-          <h2 id="path-title">不知道先点哪个？按这个顺序学就行。</h2>
+          <h2>不知道先点哪个？按这个顺序学就行。</h2>
         </div>
-
-        <div class="path-list">
-          <article>
+        <div class="steps">
+          <article class="step">
             <span>1</span>
             <h3>先学“从一句需求做页面”</h3>
-            <p>建立最基本的页面结构思维：标题、卖点、证明、行动按钮。</p>
+            <p>建立页面结构思维：标题、卖点、证明、行动按钮。</p>
           </article>
-          <article>
+          <article class="step">
             <span>2</span>
             <h3>再学“用户退款失败排查”</h3>
             <p>理解真实业务问题怎么拆成可检查的步骤。</p>
           </article>
-          <article>
+          <article class="step">
             <span>3</span>
             <h3>最后学“测试清单”</h3>
             <p>上线前用清单检查，避免只看页面好不好看。</p>
@@ -671,25 +631,25 @@
         </div>
       </section>
 
-      <section class="section explain-section" id="explain" aria-labelledby="explain-title">
-        <div>
+      <section class="section" id="how">
+        <div class="section-head">
           <p class="eyebrow">怎么使用这个网站</p>
-          <h2 id="explain-title">每篇教程都按照同一个顺序写，方便你照着做。</h2>
+          <h2>每篇教程都按照同一个顺序写，方便你照着做。</h2>
         </div>
-        <div class="explain-grid">
-          <article>
+        <div class="how-grid">
+          <article class="how">
             <h3>1. 先看真实场景</h3>
             <p>告诉你这个问题发生在什么业务里，不会一上来就堆概念。</p>
           </article>
-          <article>
+          <article class="how">
             <h3>2. 再看准备材料</h3>
             <p>列出你需要准备的截图、表格、订单号、用户反馈等信息。</p>
           </article>
-          <article>
+          <article class="how">
             <h3>3. 跟着步骤操作</h3>
             <p>每一步都写清楚“做什么、为什么做、结果怎么看”。</p>
           </article>
-          <article>
+          <article class="how">
             <h3>4. 用清单检查结果</h3>
             <p>最后给你一个检查表，确认学完后真的能交付一个结果。</p>
           </article>
@@ -697,11 +657,25 @@
       </section>
     </main>
 
-    <footer class="site-footer">
-      <p>实战教学站：把复杂工作拆成能照着做的真实用例。</p>
+    <footer class="footer">
+      <p>实战教学站单文件预览版。</p>
       <a href="#top">回到顶部</a>
     </footer>
 
-    <script src="./script.js"></script>
+    <script>
+      const filters = document.querySelectorAll(".filter");
+      const cards = document.querySelectorAll(".card");
+
+      filters.forEach((filter) => {
+        filter.addEventListener("click", () => {
+          const value = filter.dataset.filter;
+
+          filters.forEach((item) => item.classList.toggle("active", item === filter));
+          cards.forEach((card) => {
+            card.classList.toggle("hide", value !== "all" && card.dataset.category !== value);
+          });
+        });
+      });
+    </script>
   </body>
 </html>
