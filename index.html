@@ -3,265 +3,222 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aurora Lab | 下一代数字体验</title>
+    <title>实战教学站 | 从真实用例开始学习</title>
     <meta
       name="description"
-      content="一个高质感、响应式的产品官网页面，展示数字体验、模式切换、服务能力与增长成果。"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap"
-      rel="stylesheet"
+      content="一个以真实业务用例为入口的多页教学网站。每个卡片都能跳转到详细教程，包含场景、步骤、示例和检查清单。"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="site-shell">
-      <header class="site-header">
-        <a class="brand" href="#top" aria-label="Aurora Lab 首页">
-          <span class="brand-mark">A</span>
-          <span>Aurora Lab</span>
-        </a>
-        <nav class="site-nav" aria-label="主导航">
-          <a href="#modes">体验模式</a>
-          <a href="#craft">设计能力</a>
-          <a href="#proof">增长结果</a>
-          <a href="#contact">预约演示</a>
-        </nav>
-        <a class="header-action" href="#contact">开始升级</a>
-      </header>
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="实战教学站首页">
+        <span class="brand-mark">教</span>
+        <span>实战教学站</span>
+      </a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="#cases">真实用例</a>
+        <a href="#path">学习路径</a>
+        <a href="#explain">怎么使用</a>
+      </nav>
+      <a class="header-action" href="#cases">选择一个用例</a>
+    </header>
 
-      <main id="top">
-        <section class="hero section-pad" aria-labelledby="hero-title">
-          <div class="ambient ambient-one"></div>
-          <div class="ambient ambient-two"></div>
-          <div class="hero-copy">
-            <p class="eyebrow">
+    <main>
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow">不讲空话，直接照着做</p>
+          <h1>把复杂概念拆成真实任务，一张卡片就是一个完整教学。</h1>
+          <p class="hero-lead">
+            之前的页面太像简介，也有很多看不懂的词。新版改成实战学习入口：
+            你先选择一个具体场景，点进去后会看到背景说明、准备材料、操作步骤、示例内容和最后检查清单。
+          </p>
+          <div class="hero-actions">
+            <a class="primary-btn" href="#cases">从真实用例开始</a>
+            <a class="secondary-btn" href="#explain">先看怎么用</a>
+          </div>
+        </div>
+
+        <aside class="hero-board" aria-label="页面结构预览">
+          <div class="board-window">
+            <div class="window-bar">
               <span></span>
-              Premium digital experience
-            </p>
-            <h1 id="hero-title">把“能用”的网页，升级成让人愿意停留的品牌体验。</h1>
-            <p class="hero-lead">
-              用更清晰的信息层级、更有记忆点的视觉语言，以及带有节奏感的交互设计，
-              让页面从简单展示变成真正能承接信任、转化和传播的数字门面。
-            </p>
-            <div class="hero-actions">
-              <a class="primary-btn" href="#modes">查看设计方案</a>
-              <a class="secondary-btn" href="#craft">了解升级点</a>
+              <span></span>
+              <span></span>
             </div>
-            <div class="trust-row" aria-label="关键数据">
-              <div>
-                <strong>3.8x</strong>
-                <span>首屏停留提升</span>
-              </div>
-              <div>
-                <strong>92%</strong>
-                <span>移动端适配覆盖</span>
-              </div>
-              <div>
-                <strong>12+</strong>
-                <span>可复用设计模块</span>
-              </div>
+            <div class="preview-card">
+              <small>示例用例</small>
+              <h2>用户说“退款失败”，我该怎么排查？</h2>
+              <ol>
+                <li>先确认用户遇到的具体页面</li>
+                <li>再查看订单状态和退款记录</li>
+                <li>最后整理原因和回复话术</li>
+              </ol>
+              <a href="./pages/refund-troubleshooting.html">进入详细教学 →</a>
             </div>
           </div>
+        </aside>
+      </section>
 
-          <div class="hero-visual" aria-label="产品体验预览">
-            <div class="visual-toolbar">
-              <span></span>
-              <span></span>
-              <span></span>
-              <strong>Live Experience</strong>
-            </div>
-            <div class="dashboard-card spotlight-card">
-              <div>
-                <p>Design score</p>
-                <strong>96</strong>
-              </div>
-              <div class="score-ring" aria-hidden="true"></div>
-            </div>
-            <div class="dashboard-grid">
-              <article class="mini-card">
-                <span class="icon-pill">01</span>
-                <h3>视觉冲击</h3>
-                <p>渐变光效、玻璃质感与层叠空间，让页面第一眼更高级。</p>
-              </article>
-              <article class="mini-card">
-                <span class="icon-pill">02</span>
-                <h3>转化路径</h3>
-                <p>清楚安排 CTA、信任数据与内容节奏，减少用户犹豫。</p>
-              </article>
-              <article class="mini-card wide-card">
-                <div class="chart-bars" aria-hidden="true">
-                  <span style="--height: 42%"></span>
-                  <span style="--height: 68%"></span>
-                  <span style="--height: 54%"></span>
-                  <span style="--height: 82%"></span>
-                  <span style="--height: 76%"></span>
-                </div>
-                <div>
-                  <h3>真实业务表达</h3>
-                  <p>不再只有空洞文字，而是用数据、场景和流程讲清楚价值。</p>
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
+      <section class="section" id="cases" aria-labelledby="cases-title">
+        <div class="section-heading">
+          <p class="eyebrow">真实用例库</p>
+          <h2 id="cases-title">下面每一个卡片都可以点进去学，不再只是停留在一个页签里。</h2>
+          <p>
+            我把抽象能力改成普通人能理解的实际任务：做页面、查问题、整理客服反馈、做数据看板、写测试清单。
+          </p>
+        </div>
 
-        <section class="section-pad modes-section" id="modes" aria-labelledby="modes-title">
-          <div class="section-heading">
-            <p class="eyebrow"><span></span> Experience modes</p>
-            <h2 id="modes-title">三种体验模式，让页面有层次、有节奏、有用途。</h2>
+        <div class="filter-tabs" aria-label="用例分类筛选">
+          <button class="filter-tab is-active" type="button" data-filter="all">全部</button>
+          <button class="filter-tab" type="button" data-filter="website">网页制作</button>
+          <button class="filter-tab" type="button" data-filter="support">客服运营</button>
+          <button class="filter-tab" type="button" data-filter="data">数据分析</button>
+          <button class="filter-tab" type="button" data-filter="quality">质量检查</button>
+        </div>
+
+        <div class="case-grid">
+          <article class="case-card" data-category="website">
+            <div class="case-number">01</div>
+            <p class="case-type">网页制作</p>
+            <h3>从一句需求做出一个活动落地页</h3>
             <p>
-              不只是换颜色，而是围绕不同访问动机设计不同的信息重心，兼顾品牌质感和转化效率。
+              适合完全不知道怎么开始的人。教程会带你把“我要做一个活动页”拆成标题、卖点、步骤、按钮和常见问题。
             </p>
-          </div>
+            <ul>
+              <li>最后产出：一个完整活动页结构</li>
+              <li>适合人群：新手、运营、产品同学</li>
+            </ul>
+            <a class="card-link" href="./pages/landing-page.html">查看详细教学</a>
+          </article>
 
-          <div class="mode-layout">
-            <div class="mode-tabs" role="tablist" aria-label="体验模式切换">
-              <button class="mode-tab is-active" type="button" data-mode="brand" role="tab" aria-selected="true">
-                <span>Brand</span>
-                品牌沉浸
-              </button>
-              <button class="mode-tab" type="button" data-mode="growth" role="tab" aria-selected="false">
-                <span>Growth</span>
-                增长转化
-              </button>
-              <button class="mode-tab" type="button" data-mode="service" role="tab" aria-selected="false">
-                <span>Service</span>
-                服务说明
-              </button>
-            </div>
+          <article class="case-card" data-category="website">
+            <div class="case-number">02</div>
+            <p class="case-type">网页制作</p>
+            <h3>把设计稿内容整理成可开发页面</h3>
+            <p>
+              不要求你懂专业工具。教程会教你先看页面区域，再整理文字、图片、按钮和交互说明，交给开发也更清楚。
+            </p>
+            <ul>
+              <li>最后产出：页面拆解表和开发说明</li>
+              <li>适合人群：设计、产品、前端新手</li>
+            </ul>
+            <a class="card-link" href="./pages/design-to-page.html">查看详细教学</a>
+          </article>
 
-            <div class="mode-preview">
-              <article class="mode-panel is-active" data-panel="brand">
-                <p>品牌沉浸模式</p>
-                <h3>适合首页首屏和核心品牌叙事。</h3>
-                <ul>
-                  <li>大标题 + 强视觉背景，快速建立高级感。</li>
-                  <li>使用光效、动态卡片和空间层次增强记忆点。</li>
-                  <li>把口号、价值和 CTA 放在同一条清晰路径里。</li>
-                </ul>
-              </article>
-              <article class="mode-panel" data-panel="growth">
-                <p>增长转化模式</p>
-                <h3>适合落地页、活动页和产品售卖页。</h3>
-                <ul>
-                  <li>突出关键利益点、数据证明与行动按钮。</li>
-                  <li>用模块化内容减少阅读成本，提升决策速度。</li>
-                  <li>让用户每一屏都有下一步可做。</li>
-                </ul>
-              </article>
-              <article class="mode-panel" data-panel="service">
-                <p>服务说明模式</p>
-                <h3>适合解释方案、流程、能力边界。</h3>
-                <ul>
-                  <li>用流程图和服务卡片讲清楚交付方式。</li>
-                  <li>强化专业感，避免页面像临时拼出来的介绍。</li>
-                  <li>兼顾 PC 和手机端的可读性。</li>
-                </ul>
-              </article>
-            </div>
-          </div>
-        </section>
+          <article class="case-card" data-category="support">
+            <div class="case-number">03</div>
+            <p class="case-type">客服运营</p>
+            <h3>用户说“退款失败”，怎么一步步排查</h3>
+            <p>
+              用一个真实售后场景讲清楚：先问什么、查什么、怎么判断原因、最后怎么回复用户。
+            </p>
+            <ul>
+              <li>最后产出：排查记录和客服回复</li>
+              <li>适合人群：客服、运营、产品</li>
+            </ul>
+            <a class="card-link" href="./pages/refund-troubleshooting.html">查看详细教学</a>
+          </article>
 
-        <section class="section-pad craft-section" id="craft" aria-labelledby="craft-title">
-          <div class="section-heading align-left">
-            <p class="eyebrow"><span></span> Design craft</p>
-            <h2 id="craft-title">从“简单页面”升级到完整设计系统。</h2>
-          </div>
-          <div class="craft-grid">
-            <article class="craft-card">
-              <span>01</span>
-              <h3>高级视觉语言</h3>
-              <p>使用深色背景、霓虹渐变、磨砂玻璃和柔和阴影，塑造更强的品牌识别度。</p>
-            </article>
-            <article class="craft-card featured">
-              <span>02</span>
-              <h3>信息架构重排</h3>
-              <p>从首屏价值、模式说明、能力证明到预约转化，形成完整叙事链路。</p>
-            </article>
-            <article class="craft-card">
-              <span>03</span>
-              <h3>交互动效</h3>
-              <p>模式切换、悬浮反馈、背景光效和进场层次，让页面有真实产品感。</p>
-            </article>
-            <article class="craft-card">
-              <span>04</span>
-              <h3>响应式体验</h3>
-              <p>针对手机端重排导航、卡片和首屏信息，避免移动端拥挤或变形。</p>
-            </article>
-          </div>
-        </section>
+          <article class="case-card" data-category="support">
+            <div class="case-number">04</div>
+            <p class="case-type">客服运营</p>
+            <h3>把一堆用户反馈整理成优先级清单</h3>
+            <p>
+              当反馈太多时，教程会教你按“影响人数、严重程度、是否影响成交”来归类，最后得到可执行清单。
+            </p>
+            <ul>
+              <li>最后产出：反馈分类表和处理顺序</li>
+              <li>适合人群：客服主管、运营、产品</li>
+            </ul>
+            <a class="card-link" href="./pages/feedback-priority.html">查看详细教学</a>
+          </article>
 
-        <section class="section-pad proof-section" id="proof" aria-labelledby="proof-title">
-          <div class="proof-card">
-            <div>
-              <p class="eyebrow"><span></span> Proof of value</p>
-              <h2 id="proof-title">设计不是装饰，而是让用户更快理解你。</h2>
-              <p>
-                新版页面用“强首屏 + 模式切换 + 价值证明 + 行动入口”的结构，把视觉表现和业务目标连接起来。
-              </p>
-            </div>
-            <div class="proof-metrics">
-              <div>
-                <strong data-count="48">0</strong>
-                <span>%</span>
-                <p>内容扫描效率提升</p>
-              </div>
-              <div>
-                <strong data-count="6">0</strong>
-                <span>屏</span>
-                <p>完整转化叙事</p>
-              </div>
-              <div>
-                <strong data-count="100">0</strong>
-                <span>%</span>
-                <p>纯前端静态可部署</p>
-              </div>
-            </div>
-          </div>
-        </section>
+          <article class="case-card" data-category="data">
+            <div class="case-number">05</div>
+            <p class="case-type">数据分析</p>
+            <h3>做一个看得懂的用户留存看板</h3>
+            <p>
+              不从术语开始，而是从问题开始：新用户第二天还会不会回来？教程会教你设计看板指标和解释方式。
+            </p>
+            <ul>
+              <li>最后产出：留存看板字段和解读模板</li>
+              <li>适合人群：运营、产品、数据新手</li>
+            </ul>
+            <a class="card-link" href="./pages/retention-dashboard.html">查看详细教学</a>
+          </article>
 
-        <section class="section-pad process-section" aria-labelledby="process-title">
-          <div class="section-heading">
-            <p class="eyebrow"><span></span> Process</p>
-            <h2 id="process-title">页面升级的四个关键动作。</h2>
-          </div>
-          <div class="process-line">
-            <article>
-              <span>1</span>
-              <h3>重建第一印象</h3>
-              <p>用更明确的标题、视觉焦点和行动按钮解决“太普通”的问题。</p>
-            </article>
-            <article>
-              <span>2</span>
-              <h3>拆分内容模块</h3>
-              <p>让用户按块理解，而不是面对一整段平铺说明。</p>
-            </article>
-            <article>
-              <span>3</span>
-              <h3>补充可信证据</h3>
-              <p>加入数据、能力和流程，减少空泛感。</p>
-            </article>
-            <article>
-              <span>4</span>
-              <h3>完善适配细节</h3>
-              <p>保证不同屏幕尺寸下都保持视觉比例和阅读节奏。</p>
-            </article>
-          </div>
-        </section>
+          <article class="case-card" data-category="quality">
+            <div class="case-number">06</div>
+            <p class="case-type">质量检查</p>
+            <h3>上线前写一份人人能用的测试清单</h3>
+            <p>
+              教你把“这个功能有没有问题”拆成登录、按钮、边界情况、手机端和异常提示，减少上线翻车。
+            </p>
+            <ul>
+              <li>最后产出：上线前测试清单</li>
+              <li>适合人群：产品、测试、开发、运营</li>
+            </ul>
+            <a class="card-link" href="./pages/release-checklist.html">查看详细教学</a>
+          </article>
+        </div>
+      </section>
 
-        <section class="cta-section" id="contact" aria-labelledby="cta-title">
-          <div>
-            <p class="eyebrow"><span></span> Ready to launch</p>
-            <h2 id="cta-title">准备好把页面做得更像一个真正的品牌了吗？</h2>
-            <p>这个版本可以直接作为静态页面打开，也可以继续接入真实业务数据和表单提交。</p>
-          </div>
-          <a class="primary-btn light" href="mailto:hello@example.com">预约一次设计评审</a>
-        </section>
-      </main>
-    </div>
+      <section class="section path-section" id="path" aria-labelledby="path-title">
+        <div class="section-heading">
+          <p class="eyebrow">建议学习路径</p>
+          <h2 id="path-title">不知道先点哪个？按这个顺序学就行。</h2>
+        </div>
+
+        <div class="path-list">
+          <article>
+            <span>1</span>
+            <h3>先学“从一句需求做页面”</h3>
+            <p>建立最基本的页面结构思维：标题、卖点、证明、行动按钮。</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>再学“用户退款失败排查”</h3>
+            <p>理解真实业务问题怎么拆成可检查的步骤。</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>最后学“测试清单”</h3>
+            <p>上线前用清单检查，避免只看页面好不好看。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section explain-section" id="explain" aria-labelledby="explain-title">
+        <div>
+          <p class="eyebrow">怎么使用这个网站</p>
+          <h2 id="explain-title">每篇教程都按照同一个顺序写，方便你照着做。</h2>
+        </div>
+        <div class="explain-grid">
+          <article>
+            <h3>1. 先看真实场景</h3>
+            <p>告诉你这个问题发生在什么业务里，不会一上来就堆概念。</p>
+          </article>
+          <article>
+            <h3>2. 再看准备材料</h3>
+            <p>列出你需要准备的截图、表格、订单号、用户反馈等信息。</p>
+          </article>
+          <article>
+            <h3>3. 跟着步骤操作</h3>
+            <p>每一步都写清楚“做什么、为什么做、结果怎么看”。</p>
+          </article>
+          <article>
+            <h3>4. 用清单检查结果</h3>
+            <p>最后给你一个检查表，确认学完后真的能交付一个结果。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>实战教学站：把复杂工作拆成能照着做的真实用例。</p>
+      <a href="#top">回到顶部</a>
+    </footer>
 
     <script src="./script.js"></script>
   </body>

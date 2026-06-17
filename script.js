@@ -1,20 +1,41 @@
-const modeTabs = document.querySelectorAll(".mode-tab");
-const modePanels = document.querySelectorAll(".mode-panel");
-const counters = document.querySelectorAll("[data-count]");
+const filterTabs = document.querySelectorAll(".filter-tab");
+const caseCards = document.querySelectorAll(".case-card");
+const copyButtons = document.querySelectorAll(".copy-button");
 
-modeTabs.forEach((tab) => {
+filterTabs.forEach((tab) => {
   tab.addEventListener("click", () => {
-    const targetMode = tab.dataset.mode;
+    const filter = tab.dataset.filter;
 
-    modeTabs.forEach((item) => {
-      const isCurrent = item === tab;
-      item.classList.toggle("is-active", isCurrent);
-      item.setAttribute("aria-selected", String(isCurrent));
+    filterTabs.forEach((item) => {
+      item.classList.toggle("is-active", item === tab);
     });
 
-    modePanels.forEach((panel) => {
-      panel.classList.toggle("is-active", panel.dataset.panel === targetMode);
+    caseCards.forEach((card) => {
+      const shouldShow = filter === "all" || card.dataset.category === filter;
+      card.classList.toggle("is-hidden", !shouldShow);
     });
+  });
+});
+
+copyButtons.forEach((button) => {
+  button.addEventListener("click", async () => {
+    const target = document.getElementById(button.dataset.copyTarget);
+
+    if (!target) {
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(target.textContent.trim());
+      const originalText = button.textContent;
+      button.textContent = "已复制";
+
+      window.setTimeout(() => {
+        button.textContent = originalText;
+      }, 1400);
+    } catch {
+      button.textContent = "请手动复制";
+    }
   });
 });
 
@@ -25,38 +46,3 @@ window.addEventListener("pointermove", (event) => {
   document.body.style.setProperty("--pointer-x", `${x}%`);
   document.body.style.setProperty("--pointer-y", `${y}%`);
 });
-
-const animateCounter = (counter) => {
-  const target = Number(counter.dataset.count);
-  const duration = 1200;
-  const start = performance.now();
-
-  const tick = (now) => {
-    const progress = Math.min((now - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-
-    counter.textContent = Math.round(target * eased);
-
-    if (progress < 1) {
-      requestAnimationFrame(tick);
-    }
-  };
-
-  requestAnimationFrame(tick);
-};
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting || entry.target.dataset.animated) {
-        return;
-      }
-
-      entry.target.dataset.animated = "true";
-      animateCounter(entry.target);
-    });
-  },
-  { threshold: 0.55 },
-);
-
-counters.forEach((counter) => observer.observe(counter));
