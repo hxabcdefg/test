@@ -1,0 +1,1384 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vibe Coding 教学工作坊：从想法到可验证交付</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #11182d;
+      --bg-card: rgba(255, 255, 255, 0.075);
+      --bg-card-strong: rgba(255, 255, 255, 0.12);
+      --text: #edf2ff;
+      --muted: #a9b4d0;
+      --accent: #8ae9ff;
+      --accent-2: #c3ff7a;
+      --accent-3: #ffca7a;
+      --danger: #ff8a9a;
+      --line: rgba(255, 255, 255, 0.15);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(138, 233, 255, 0.2), transparent 28rem),
+        radial-gradient(circle at 86% 16%, rgba(195, 255, 122, 0.16), transparent 32rem),
+        linear-gradient(135deg, #060915 0%, var(--bg) 48%, #111322 100%);
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(6, 9, 21, 0.82);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #07101f;
+      font-weight: 900;
+      box-shadow: 0 10px 30px rgba(138, 233, 255, 0.25);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a {
+      padding: 8px 12px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.06);
+      text-decoration: none;
+    }
+
+    .hero {
+      padding: 82px 0 48px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(138, 233, 255, 0.35);
+      border-radius: 999px;
+      color: var(--accent);
+      background: rgba(138, 233, 255, 0.08);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin: 0;
+      line-height: 1.16;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 82px);
+      letter-spacing: -0.06em;
+    }
+
+    h2 {
+      font-size: clamp(30px, 4.3vw, 50px);
+      letter-spacing: -0.04em;
+    }
+
+    h3 {
+      font-size: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    h4 {
+      font-size: 18px;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: clamp(18px, 2.1vw, 22px);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 11px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.08);
+      font-weight: 800;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+    }
+
+    .button.primary {
+      color: #07101f;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-color: transparent;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 100%;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.045));
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card::before {
+      position: absolute;
+      inset: -45% -30% auto auto;
+      width: 300px;
+      height: 300px;
+      border-radius: 999px;
+      background: rgba(138, 233, 255, 0.18);
+      content: "";
+      filter: blur(8px);
+    }
+
+    .metric-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .metric {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(6, 9, 21, 0.5);
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--accent-2);
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section {
+      padding: 54px 0;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: minmax(0, 0.88fr) minmax(260px, 0.52fr);
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 26px;
+    }
+
+    .section-kicker {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--accent-3);
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      box-shadow: 0 16px 46px rgba(0, 0, 0, 0.16);
+    }
+
+    .card.pad {
+      padding: 24px;
+    }
+
+    .card strong,
+    .accent {
+      color: var(--accent-2);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.06);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .pill.skill {
+      color: var(--accent);
+      border-color: rgba(138, 233, 255, 0.24);
+      background: rgba(138, 233, 255, 0.08);
+    }
+
+    .pill.mcp {
+      color: var(--accent-2);
+      border-color: rgba(195, 255, 122, 0.24);
+      background: rgba(195, 255, 122, 0.08);
+    }
+
+    .flow {
+      counter-reset: flow;
+    }
+
+    .flow-item {
+      position: relative;
+      padding: 22px 22px 22px 72px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+    }
+
+    .flow-item::before {
+      position: absolute;
+      top: 22px;
+      left: 22px;
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      color: #07101f;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      counter-increment: flow;
+      content: counter(flow);
+      font-weight: 900;
+    }
+
+    .scenario-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .filter-button {
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .filter-button.active,
+    .filter-button:hover {
+      color: #07101f;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-color: transparent;
+    }
+
+    .scenario {
+      display: grid;
+      grid-template-columns: minmax(0, 0.76fr) minmax(280px, 0.44fr);
+      gap: 18px;
+      margin-bottom: 18px;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .scenario-main,
+    .scenario-side {
+      padding: 24px;
+    }
+
+    .scenario-side {
+      border-left: 1px solid var(--line);
+      background: rgba(0, 0, 0, 0.14);
+    }
+
+    .scenario h3 {
+      margin-bottom: 10px;
+    }
+
+    .scenario ul,
+    .scenario ol {
+      padding-left: 1.2em;
+    }
+
+    .scenario li + li,
+    .checklist li + li {
+      margin-top: 7px;
+    }
+
+    .prompt {
+      position: relative;
+      margin-top: 14px;
+      padding: 18px;
+      border: 1px solid rgba(138, 233, 255, 0.22);
+      border-radius: var(--radius-md);
+      background: rgba(4, 12, 24, 0.76);
+      color: #dffaff;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 14px;
+      white-space: pre-wrap;
+    }
+
+    .copy-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 5px 8px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .matrix {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .matrix th,
+    .matrix td {
+      padding: 15px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .matrix th {
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .matrix tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .timeline .card {
+      padding: 18px;
+    }
+
+    .timeline small {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--accent-3);
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    details + details {
+      margin-top: 12px;
+    }
+
+    summary {
+      padding: 16px 18px;
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    details .details-body {
+      padding: 0 18px 18px;
+      color: var(--muted);
+    }
+
+    .callout {
+      padding: 22px;
+      border: 1px solid rgba(195, 255, 122, 0.28);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(195, 255, 122, 0.12), rgba(138, 233, 255, 0.08));
+    }
+
+    .warning {
+      border-color: rgba(255, 138, 154, 0.3);
+      background: rgba(255, 138, 154, 0.08);
+    }
+
+    .footer {
+      padding: 42px 0 60px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .section-header,
+      .scenario,
+      .grid.two,
+      .grid.three,
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+
+      .scenario-side {
+        border-top: 1px solid var(--line);
+        border-left: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 44px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="页面导航">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="返回顶部">
+        <span class="brand-mark">VC</span>
+        <span>Vibe Coding Workshop</span>
+      </a>
+      <div class="nav-links">
+        <a href="#mindset">方法论</a>
+        <a href="#skills">Skills</a>
+        <a href="#mcp">MCP</a>
+        <a href="#scenarios">场景</a>
+        <a href="#labs">练习</a>
+        <a href="#rubric">验收</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero page">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">教学版重写 · 从演示走向真实工作流</span>
+          <h1>把 Vibe Coding 教成一套可复制的工程交付能力</h1>
+          <p class="lead">
+            本页面面向课堂、内训和工作坊：不止介绍“和 AI 对话写代码”，而是围绕真实任务拆解
+            <strong>意图表达、上下文构建、Skills 固化、MCP 连接、验证闭环</strong>，让学员能把 Cursor 用在日常研发场景中。
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#scenarios">查看教学场景</a>
+            <a class="button" href="#labs">进入课堂练习</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="课程总览">
+          <h3>课程目标</h3>
+          <p class="muted">
+            让学员从“让 AI 生成代码”升级为“带着 AI 做需求澄清、系统理解、实现、测试、交付和复盘”。
+          </p>
+          <div class="metric-grid">
+            <div class="metric">
+              <strong>6</strong>
+              <span>个真实业务场景，覆盖前端、后端、数据、测试、运维和产品协作</span>
+            </div>
+            <div class="metric">
+              <strong>8</strong>
+              <span>类 Skills 模板，用于沉淀团队规范和重复任务</span>
+            </div>
+            <div class="metric">
+              <strong>10+</strong>
+              <span>种 MCP 连接示例，展示 AI 如何读取外部事实源</span>
+            </div>
+            <div class="metric">
+              <strong>1</strong>
+              <span>条核心闭环：意图 -> 上下文 -> 计划 -> 修改 -> 验证 -> 交付</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="mindset" class="section page">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">Mindset</span>
+          <h2>不要把 Vibe Coding 讲成“魔法”，要讲成“工程协作”</h2>
+        </div>
+        <p class="section-copy">
+          教学重点不是让 AI 一次生成完美代码，而是让学员知道何时让 AI 探索、何时收敛、何时验证，以及如何把隐性经验沉淀为可复用资产。
+        </p>
+      </div>
+
+      <div class="grid three">
+        <article class="card pad">
+          <h3>1. 从提示词转向任务协议</h3>
+          <p class="muted">
+            提示词不是一句“帮我写一个页面”，而是包含目标、约束、上下文、验收标准和风险边界的任务协议。
+          </p>
+          <div class="pill-row">
+            <span class="pill">目标</span>
+            <span class="pill">范围</span>
+            <span class="pill">约束</span>
+            <span class="pill">验收</span>
+          </div>
+        </article>
+        <article class="card pad">
+          <h3>2. 从代码生成转向上下文工程</h3>
+          <p class="muted">
+            AI 的输出质量取决于它能看见什么。学员要学会选择文件、引用文档、拉取 issue、读取数据库结构，并让模型先解释再修改。
+          </p>
+          <div class="pill-row">
+            <span class="pill">代码图谱</span>
+            <span class="pill">业务事实</span>
+            <span class="pill">运行证据</span>
+          </div>
+        </article>
+        <article class="card pad">
+          <h3>3. 从个人技巧转向团队资产</h3>
+          <p class="muted">
+            常用审查清单、代码风格、发布流程、排障路径都应该被写成 Skills 或规则，让团队持续复用同一套经验。
+          </p>
+          <div class="pill-row">
+            <span class="pill skill">Skills</span>
+            <span class="pill mcp">MCP</span>
+            <span class="pill">Rules</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section page">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">Workflow</span>
+          <h2>推荐课堂主线：六步闭环</h2>
+        </div>
+        <p class="section-copy">
+          每个案例都按同一条主线推进，帮助学员形成稳定肌肉记忆。讲课时先展示完整闭环，再让学员分组复现。
+        </p>
+      </div>
+
+      <div class="grid two flow">
+        <article class="flow-item">
+          <h3>表达意图</h3>
+          <p class="muted">把“我要做什么”写清楚：业务目标、用户路径、不可接受的结果、交付物格式。</p>
+        </article>
+        <article class="flow-item">
+          <h3>装配上下文</h3>
+          <p class="muted">让 AI 读取相关代码、设计稿、接口文档、日志、issue、数据库 schema，而不是凭空猜。</p>
+        </article>
+        <article class="flow-item">
+          <h3>生成计划</h3>
+          <p class="muted">要求 AI 先给改动范围、风险点、验证方式。讲师要强调：计划是用来审查的，不是自动接受的。</p>
+        </article>
+        <article class="flow-item">
+          <h3>小步修改</h3>
+          <p class="muted">围绕一个可验证目标推进，避免一次性生成大块无法审查的代码。</p>
+        </article>
+        <article class="flow-item">
+          <h3>运行验证</h3>
+          <p class="muted">用测试、lint、类型检查、浏览器自动化、接口请求和日志证据证明结果。</p>
+        </article>
+        <article class="flow-item">
+          <h3>复盘沉淀</h3>
+          <p class="muted">把成功模式写入 Skill，把反复出现的坑写入团队规则，把外部事实源接入 MCP。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="section page">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">Skills</span>
+          <h2>Skills 不是“更长的提示词”，而是团队经验的可执行封装</h2>
+        </div>
+        <p class="section-copy">
+          课堂中要让学员亲手写一个 Skill，并在真实任务里调用它。下面这些 Skill 模板可以直接作为训练素材。
+        </p>
+      </div>
+
+      <div class="grid two">
+        <article class="card pad">
+          <h3>需求澄清 Skill</h3>
+          <p class="muted">用于把模糊需求转成可实现任务，尤其适合产品故事、客服反馈和口头描述。</p>
+          <div class="prompt" data-copy>
+技能目标：把输入需求拆成用户目标、边界条件、数据依赖、验收标准和待确认问题。
+
+执行步骤：
+1. 先复述业务目标，不写代码。
+2. 标出缺失信息，并按“必须确认 / 可以假设 / 后续验证”分类。
+3. 输出最小可交付范围和不做范围。
+4. 生成可直接放入 issue 的任务说明。
+          </div>
+        </article>
+
+        <article class="card pad">
+          <h3>代码库导览 Skill</h3>
+          <p class="muted">用于新同学或跨项目修改，让 AI 先读系统结构，再给出修改入口。</p>
+          <div class="prompt" data-copy>
+技能目标：在修改前建立代码地图。
+
+执行步骤：
+1. 搜索路由、入口、测试、配置和领域模型。
+2. 画出请求链路或组件树。
+3. 标注“高置信入口”和“需要运行确认的入口”。
+4. 在给计划前引用具体文件路径。
+          </div>
+        </article>
+
+        <article class="card pad">
+          <h3>安全改动 Skill</h3>
+          <p class="muted">用于登录、权限、支付、数据导出等高风险区域，要求 AI 先做威胁建模。</p>
+          <div class="prompt" data-copy>
+技能目标：任何涉及身份、权限、资金、隐私数据的改动都必须先做风险审查。
+
+检查清单：
+- 输入是否可信，是否需要校验和编码。
+- 当前用户是否有权限访问目标资源。
+- 日志中是否可能泄漏敏感信息。
+- 测试是否覆盖拒绝访问、越权和异常路径。
+          </div>
+        </article>
+
+        <article class="card pad">
+          <h3>测试补全 Skill</h3>
+          <p class="muted">用于遗留代码或快速迭代后补齐保护网，强调覆盖行为而不是覆盖实现细节。</p>
+          <div class="prompt" data-copy>
+技能目标：为本次改动补齐最小但有效的测试。
+
+执行步骤：
+1. 识别用户可观察行为和失败模式。
+2. 优先补单元测试，其次补集成测试或端到端测试。
+3. 每个测试名称写清业务含义。
+4. 运行测试并解释失败原因，不盲目改断言。
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="mcp" class="section page">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">MCP</span>
+          <h2>MCP 的教学重点：让 AI 接触“真实事实源”</h2>
+        </div>
+        <p class="section-copy">
+          MCP 不是插件列表，而是把 AI 从代码仓库扩展到真实工作环境。好的演示要让学员看到：AI 读取事实、引用证据、基于证据修改。
+        </p>
+      </div>
+
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>事实源</th>
+            <th>可接入的 MCP</th>
+            <th>课堂演示方式</th>
+            <th>常见风险</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>需求与缺陷</td>
+            <td>GitHub Issues、Linear、Jira</td>
+            <td>让 AI 读取 issue 描述、评论、验收标准，再生成实现计划和测试清单。</td>
+            <td>评论中可能有过期信息，需要让 AI 标出冲突和时间线。</td>
+          </tr>
+          <tr>
+            <td>设计与产品素材</td>
+            <td>Figma、Notion、Confluence</td>
+            <td>读取组件尺寸、颜色 token、交互说明，映射到项目已有设计系统。</td>
+            <td>不要让 AI 绕开现有组件库重写 UI。</td>
+          </tr>
+          <tr>
+            <td>运行数据</td>
+            <td>Postgres、MySQL、BigQuery、Snowflake</td>
+            <td>查询 schema、样例数据和异常分布，再决定接口字段、迁移和边界测试。</td>
+            <td>只读账号、脱敏数据、查询限制必须提前配置。</td>
+          </tr>
+          <tr>
+            <td>线上故障证据</td>
+            <td>Sentry、Datadog、Grafana、CloudWatch</td>
+            <td>读取错误堆栈、日志片段和指标变化，让 AI 反推最可能的代码入口。</td>
+            <td>日志片段不是完整真相，需要结合代码和复现步骤。</td>
+          </tr>
+          <tr>
+            <td>浏览器行为</td>
+            <td>Playwright、Browser、Chrome DevTools</td>
+            <td>让 AI 打开页面、复现交互、截图、检查 console 和网络请求。</td>
+            <td>演示环境要稳定，账号和测试数据要可重置。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="scenarios" class="section page">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">Scenarios</span>
+          <h2>六个可直接上课的真实场景</h2>
+        </div>
+        <p class="section-copy">
+          每个场景都包含业务目标、Skills、MCP、课堂操作和示例提示词。讲师可以任选其中一个完整演示，再让学员分组完成另一个。
+        </p>
+      </div>
+
+      <div class="scenario-toolbar" aria-label="场景筛选">
+        <button class="filter-button active" data-filter="all">全部</button>
+        <button class="filter-button" data-filter="product">产品交付</button>
+        <button class="filter-button" data-filter="data">数据与后端</button>
+        <button class="filter-button" data-filter="quality">测试与质量</button>
+        <button class="filter-button" data-filter="ops">排障与运维</button>
+      </div>
+
+      <article class="card scenario" data-category="product quality">
+        <div class="scenario-main">
+          <h3>场景一：从 Figma 到可访问的设置页</h3>
+          <p class="muted">
+            任务不是“生成一个设置页面”，而是基于设计稿、组件库和可访问性要求，把已有产品中的设置页补齐并验证交互。
+          </p>
+          <div class="pill-row">
+            <span class="pill skill">代码库导览 Skill</span>
+            <span class="pill skill">UI 一致性 Skill</span>
+            <span class="pill skill">测试补全 Skill</span>
+            <span class="pill mcp">Figma MCP</span>
+            <span class="pill mcp">Playwright MCP</span>
+          </div>
+          <ol>
+            <li>读取 Figma frame，提取布局、状态、token 和交互说明。</li>
+            <li>让 AI 搜索项目已有表单组件、开关组件、设置页路由和测试样例。</li>
+            <li>要求 AI 给出“复用组件清单”，禁止直接硬编码样式。</li>
+            <li>小步实现页面、空状态、保存成功和错误提示。</li>
+            <li>用 Playwright 打开页面，检查键盘导航、表单校验、console 和截图差异。</li>
+          </ol>
+          <div class="prompt" data-copy>
+请先读取 Figma 中“Account Settings / Notification”这个 frame，并结合当前代码库已有设计系统完成分析。
+
+要求：
+1. 不要直接写代码，先列出应复用的组件、路由入口、状态管理位置和测试入口。
+2. 标出 Figma 和现有组件库不一致的地方。
+3. 给出实现计划，必须包含可访问性验证和 Playwright 验证步骤。
+4. 等我确认计划后，再分步骤修改。
+          </div>
+        </div>
+        <aside class="scenario-side">
+          <h4>讲师强调</h4>
+          <ul class="muted">
+            <li>AI 要先读设计和代码，再生成实现。</li>
+            <li>Skills 用来约束“必须复用组件库”。</li>
+            <li>MCP 的价值是让设计稿成为事实源，而不是截图灵感。</li>
+          </ul>
+          <h4>交付物</h4>
+          <ul class="muted">
+            <li>页面实现</li>
+            <li>组件复用说明</li>
+            <li>可访问性与浏览器验证记录</li>
+          </ul>
+        </aside>
+      </article>
+
+      <article class="card scenario" data-category="product data">
+        <div class="scenario-main">
+          <h3>场景二：退款策略变更，从 issue 到后端实现</h3>
+          <p class="muted">
+            业务提出“部分订单支持自动退款”，学员要让 AI 读取 issue、数据库结构、支付接口和现有测试，完成可审查的后端改动。
+          </p>
+          <div class="pill-row">
+            <span class="pill skill">需求澄清 Skill</span>
+            <span class="pill skill">安全改动 Skill</span>
+            <span class="pill skill">测试补全 Skill</span>
+            <span class="pill mcp">GitHub MCP</span>
+            <span class="pill mcp">Postgres MCP</span>
+            <span class="pill mcp">Stripe 文档 MCP</span>
+          </div>
+          <ol>
+            <li>读取 GitHub issue 和评论，整理退款策略、边界和未决问题。</li>
+            <li>查询订单、支付、退款表结构，确认当前状态机和幂等字段。</li>
+            <li>让 AI 先画出退款请求链路，标注权限、金额校验和外部 API 调用点。</li>
+            <li>实现策略判断、审计日志和幂等保护。</li>
+            <li>补充成功、金额越界、重复请求、无权限和支付服务失败测试。</li>
+          </ol>
+          <div class="prompt" data-copy>
+请使用需求澄清 Skill 和安全改动 Skill 分析 GitHub issue #1284：自动退款策略调整。
+
+请同时读取数据库中的 orders、payments、refunds schema，并回答：
+1. 当前状态机如何流转，哪里适合加入新策略。
+2. 哪些字段可用于幂等和审计，哪些字段缺失。
+3. 哪些边界必须测试：金额、权限、重复请求、外部支付失败。
+4. 给出最小改动计划，不要先写代码。
+          </div>
+        </div>
+        <aside class="scenario-side">
+          <h4>讲师强调</h4>
+          <ul class="muted">
+            <li>后端场景必须让 AI 接触真实 schema。</li>
+            <li>支付、权限、资金类改动必须触发安全 Skill。</li>
+            <li>AI 的计划要包含失败路径，不只覆盖 happy path。</li>
+          </ul>
+          <h4>可扩展讨论</h4>
+          <ul class="muted">
+            <li>数据库迁移是否必要</li>
+            <li>审计日志字段如何设计</li>
+            <li>如何 mock 外部支付服务</li>
+          </ul>
+        </aside>
+      </article>
+
+      <article class="card scenario" data-category="ops quality">
+        <div class="scenario-main">
+          <h3>场景三：线上 500 告警排障与修复</h3>
+          <p class="muted">
+            让学员体验 AI 不只是写代码，还能连接监控、日志和错误堆栈，形成“证据驱动”的排障路径。
+          </p>
+          <div class="pill-row">
+            <span class="pill skill">事故排查 Skill</span>
+            <span class="pill skill">回归测试 Skill</span>
+            <span class="pill mcp">Sentry MCP</span>
+            <span class="pill mcp">Datadog MCP</span>
+            <span class="pill mcp">GitHub MCP</span>
+          </div>
+          <ol>
+            <li>读取最近的 Sentry issue，提取堆栈、请求参数、用户影响和首次出现版本。</li>
+            <li>查询 Datadog 指标，确认是否与部署、流量或第三方服务波动相关。</li>
+            <li>让 AI 从堆栈回到代码入口，解释可能原因并提出复现方法。</li>
+            <li>先写失败测试或最小复现，再修复空值、竞态或边界处理。</li>
+            <li>生成 PR 说明：根因、修复、验证、剩余风险。</li>
+          </ol>
+          <div class="prompt" data-copy>
+请使用事故排查 Skill 分析 Sentry issue “CheckoutSessionError spikes after release 2026.06.17”。
+
+请完成：
+1. 汇总堆栈、受影响接口、最近部署和错误趋势。
+2. 回到代码库找出最可能入口，并说明依据。
+3. 给出一个最小复现或失败测试。
+4. 修复前先列出两个可能误判的原因，避免只根据第一条日志下结论。
+          </div>
+        </div>
+        <aside class="scenario-side">
+          <h4>讲师强调</h4>
+          <ul class="muted">
+            <li>MCP 让 AI 能引用线上证据。</li>
+            <li>排障要先复现，不能直接“猜修”。</li>
+            <li>PR 描述要服务后续 review 和 incident review。</li>
+          </ul>
+          <h4>课堂提问</h4>
+          <ul class="muted">
+            <li>日志与代码冲突时相信谁？</li>
+            <li>什么时候应该回滚而不是热修？</li>
+          </ul>
+        </aside>
+      </article>
+
+      <article class="card scenario" data-category="data product">
+        <div class="scenario-main">
+          <h3>场景四：数据看板新增“留存分层”指标</h3>
+          <p class="muted">
+            这是一个跨数据、后端和前端的综合场景。关键是让 AI 先确认指标定义和数据口径，再写查询和 UI。
+          </p>
+          <div class="pill-row">
+            <span class="pill skill">指标定义 Skill</span>
+            <span class="pill skill">代码库导览 Skill</span>
+            <span class="pill mcp">BigQuery MCP</span>
+            <span class="pill mcp">Notion MCP</span>
+            <span class="pill mcp">GitHub MCP</span>
+          </div>
+          <ol>
+            <li>读取 Notion 中指标口径：活跃用户、首访日期、留存窗口、排除规则。</li>
+            <li>查询数据仓库 schema 和样例行，确认字段可用性。</li>
+            <li>让 AI 生成 SQL 草案，但要求解释 join、过滤和性能风险。</li>
+            <li>找到现有看板 API 和图表组件，接入新指标。</li>
+            <li>添加 SQL 快照测试、API 测试和前端空数据状态。</li>
+          </ol>
+          <div class="prompt" data-copy>
+请使用指标定义 Skill，读取 Notion 页面“Retention Segments v2”和 BigQuery 中 analytics.events、analytics.users 的 schema。
+
+在写代码前请输出：
+1. 指标口径，用业务语言和 SQL 语言各描述一次。
+2. 需要排除的数据：测试账号、内部账号、缺失首访日期、重复事件。
+3. 查询性能风险和建议索引或分区条件。
+4. 需要修改的 API、类型定义、图表组件和测试文件。
+          </div>
+        </div>
+        <aside class="scenario-side">
+          <h4>讲师强调</h4>
+          <ul class="muted">
+            <li>数据场景最怕“口径猜测”。</li>
+            <li>AI 生成 SQL 后必须解释数据过滤逻辑。</li>
+            <li>前端展示要考虑空数据、慢查询和权限。</li>
+          </ul>
+          <h4>交付物</h4>
+          <ul class="muted">
+            <li>指标口径说明</li>
+            <li>查询与 API 实现</li>
+            <li>看板 UI 与测试</li>
+          </ul>
+        </aside>
+      </article>
+
+      <article class="card scenario" data-category="quality product">
+        <div class="scenario-main">
+          <h3>场景五：遗留表单重构，保持行为不变</h3>
+          <p class="muted">
+            让学员学习“AI 辅助重构”的正确姿势：先锁定现有行为，再小步替换，而不是让 AI 一次重写整个模块。
+          </p>
+          <div class="pill-row">
+            <span class="pill skill">行为保护 Skill</span>
+            <span class="pill skill">测试补全 Skill</span>
+            <span class="pill mcp">Playwright MCP</span>
+            <span class="pill mcp">GitHub MCP</span>
+          </div>
+          <ol>
+            <li>让 AI 阅读遗留表单和近期 bug PR，整理现有行为清单。</li>
+            <li>用 Playwright 录制当前交互：必填校验、动态字段、提交失败、成功跳转。</li>
+            <li>补充保护性测试，确保重构前测试能描述行为。</li>
+            <li>分离数据转换、校验、UI 组件，逐步替换。</li>
+            <li>对比重构前后截图和网络请求，确认行为不变。</li>
+          </ol>
+          <div class="prompt" data-copy>
+请使用行为保护 Skill 分析 LegacyProfileForm。
+
+要求：
+1. 先列出现有用户行为，不评价代码质量。
+2. 找到最近 3 个与该表单相关的 bugfix PR，提取不能破坏的边界。
+3. 设计重构前必须补的测试。
+4. 重构计划必须按小步提交组织，每一步都有验证方式。
+          </div>
+        </div>
+        <aside class="scenario-side">
+          <h4>讲师强调</h4>
+          <ul class="muted">
+            <li>重构不是重新生成。</li>
+            <li>Skills 用来强制“先保护行为”。</li>
+            <li>浏览器 MCP 可作为可视化回归证据。</li>
+          </ul>
+          <h4>常见错误</h4>
+          <ul class="muted">
+            <li>让 AI 删除看似无用的分支</li>
+            <li>只看单元测试，不看真实交互</li>
+            <li>忽略历史 bug 的业务原因</li>
+          </ul>
+        </aside>
+      </article>
+
+      <article class="card scenario" data-category="ops data">
+        <div class="scenario-main">
+          <h3>场景六：客服反馈批量归因，生成修复候选</h3>
+          <p class="muted">
+            这个场景适合展示 AI 如何把非结构化反馈转成工程任务：读取 Slack、工单、日志和代码，找出高价值修复点。
+          </p>
+          <div class="pill-row">
+            <span class="pill skill">反馈归因 Skill</span>
+            <span class="pill skill">需求澄清 Skill</span>
+            <span class="pill mcp">Slack MCP</span>
+            <span class="pill mcp">Zendesk MCP</span>
+            <span class="pill mcp">Datadog MCP</span>
+            <span class="pill mcp">GitHub MCP</span>
+          </div>
+          <ol>
+            <li>读取一组客服工单和 Slack 讨论，按用户意图和失败现象聚类。</li>
+            <li>抽取复现步骤、账号类型、设备、时间和错误提示。</li>
+            <li>结合日志或指标确认是否存在系统性问题。</li>
+            <li>让 AI 输出修复候选：文案问题、交互问题、后端错误、配置问题。</li>
+            <li>将最高价值候选转成 issue，包含证据、范围、验收标准和测试建议。</li>
+          </ol>
+          <div class="prompt" data-copy>
+请使用反馈归因 Skill，读取最近一周带有 “cannot export invoice” 标签的 Zendesk 工单和相关 Slack 线程。
+
+请输出：
+1. 反馈聚类，每类包含代表工单、用户影响和置信度。
+2. 需要进一步验证的日志或指标。
+3. 最可能的代码入口或配置入口。
+4. 一个可交给工程团队的 issue 草案，包含验收标准和测试建议。
+          </div>
+        </div>
+        <aside class="scenario-side">
+          <h4>讲师强调</h4>
+          <ul class="muted">
+            <li>AI 适合做信息归纳，但必须保留证据链接。</li>
+            <li>不要把所有反馈都转成代码改动。</li>
+            <li>好的输出应该能直接进入工程队列。</li>
+          </ul>
+          <h4>延伸练习</h4>
+          <ul class="muted">
+            <li>让学员比较 AI 聚类和人工聚类</li>
+            <li>讨论隐私数据脱敏策略</li>
+          </ul>
+        </aside>
+      </article>
+    </section>
+
+    <section id="labs" class="section page">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">Labs</span>
+          <h2>课堂练习设计：让学员真的跑一遍闭环</h2>
+        </div>
+        <p class="section-copy">
+          练习不要只让学员“写提示词”。每个小组都应该产出计划、代码、验证证据和复盘 Skill。
+        </p>
+      </div>
+
+      <div class="timeline">
+        <article class="card">
+          <small>STEP 01</small>
+          <h3>任务拆解</h3>
+          <p class="muted">小组选择一个场景，把业务目标转成任务协议：目标、上下文、约束、验收。</p>
+        </article>
+        <article class="card">
+          <small>STEP 02</small>
+          <h3>上下文装配</h3>
+          <p class="muted">至少引入两个事实源：代码库加一个 MCP，例如 issue、Figma、数据库或日志。</p>
+        </article>
+        <article class="card">
+          <small>STEP 03</small>
+          <h3>实现验证</h3>
+          <p class="muted">按 AI 计划小步修改，并留下测试、截图、日志或命令输出作为证据。</p>
+        </article>
+        <article class="card">
+          <small>STEP 04</small>
+          <h3>沉淀复盘</h3>
+          <p class="muted">每组把一个可复用经验写成 Skill，并说明下次何时触发。</p>
+        </article>
+      </div>
+
+      <div class="grid two" style="margin-top: 18px;">
+        <article class="card pad">
+          <h3>学员任务卡模板</h3>
+          <div class="prompt" data-copy>
+任务名称：
+业务目标：
+用户或系统影响：
+必须读取的上下文：
+- 代码：
+- MCP：
+- 文档：
+
+本次要调用的 Skill：
+验收标准：
+不做范围：
+验证证据：
+复盘沉淀：
+          </div>
+        </article>
+        <article class="card pad">
+          <h3>讲师观察清单</h3>
+          <ul class="checklist muted">
+            <li>学员是否要求 AI 先读上下文，而不是直接写代码。</li>
+            <li>计划中是否有风险、文件范围和验证方式。</li>
+            <li>是否正确使用 Skill 约束输出，而不是每次重新解释团队规范。</li>
+            <li>MCP 输出是否被引用为证据，还是只被当作背景材料。</li>
+            <li>最终提交是否包含测试或可复现验证记录。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="rubric" class="section page">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">Rubric</span>
+          <h2>评价标准：看交付能力，不看提示词花哨程度</h2>
+        </div>
+        <p class="section-copy">
+          用下面的标准给课堂成果打分，可以避免学员把重点放在“模型说得好听”，而忽略工程质量。
+        </p>
+      </div>
+
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>维度</th>
+            <th>优秀表现</th>
+            <th>需要提醒</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>任务表达</td>
+            <td>目标、约束、验收、不做范围清楚，AI 能复述任务并发现缺口。</td>
+            <td>只有一句“帮我实现”，缺少业务边界和风险说明。</td>
+          </tr>
+          <tr>
+            <td>上下文质量</td>
+            <td>同时读取代码、文档、issue、数据或运行证据，并引用具体来源。</td>
+            <td>只依赖聊天上下文或模型常识。</td>
+          </tr>
+          <tr>
+            <td>Skills 使用</td>
+            <td>能把团队规范、审查清单和重复流程封装为 Skill，并在任务中触发。</td>
+            <td>每次手写长提示词，或 Skill 与实际任务无关。</td>
+          </tr>
+          <tr>
+            <td>MCP 使用</td>
+            <td>让 AI 读取真实事实源，并据此改变计划或实现。</td>
+            <td>只展示“能连上”，没有用于决策。</td>
+          </tr>
+          <tr>
+            <td>验证闭环</td>
+            <td>有测试、截图、日志、命令输出或查询结果作为证据。</td>
+            <td>仅凭 AI 自述“已经完成”。</td>
+          </tr>
+          <tr>
+            <td>交付表达</td>
+            <td>PR 或汇报包含改动摘要、验证、风险和后续建议。</td>
+            <td>只粘贴代码，没有说明为什么这样改。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section page">
+      <div class="grid two">
+        <article class="callout">
+          <h2>讲课开场白建议</h2>
+          <p>
+            “今天我们不学习如何让 AI 替你写代码，而是学习如何像技术负责人一样指挥一个会写代码、会读资料、会跑验证的协作者。
+            你给它的不是一句提示词，而是一套工程上下文和验收协议。”
+          </p>
+        </article>
+        <article class="callout warning">
+          <h2>课堂避坑提醒</h2>
+          <ul>
+            <li>不要用玩具需求做主案例，学员会误以为 Vibe Coding 只适合 demo。</li>
+            <li>不要只展示成功生成代码，要展示 AI 读错、跑失败、再修正的过程。</li>
+            <li>不要把 MCP 讲成工具清单，要讲清它如何改变 AI 的判断依据。</li>
+            <li>不要把 Skills 当提示词收藏夹，要让它承载团队规范和流程。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section page">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">FAQ</span>
+          <h2>常见问题</h2>
+        </div>
+        <p class="section-copy">这些问答适合放在课程结尾，用来把学员的兴奋感拉回到可落地的工作方式。</p>
+      </div>
+
+      <details>
+        <summary>Vibe Coding 是否意味着不需要懂代码？</summary>
+        <div class="details-body">
+          不是。它降低了从想法到代码的摩擦，但提高了对任务拆解、系统理解、验证和审查的要求。懂工程的人会更容易把 AI 变成生产力。
+        </div>
+      </details>
+      <details>
+        <summary>什么时候不应该让 AI 直接改代码？</summary>
+        <div class="details-body">
+          当需求不清、上下文不足、涉及权限资金隐私、缺少验证环境、或改动跨多个系统时，应先让 AI 做分析、风险识别和计划。
+        </div>
+      </details>
+      <details>
+        <summary>Skills 和项目规则有什么区别？</summary>
+        <div class="details-body">
+          项目规则更像长期约束，例如代码风格和团队约定；Skills 更像可触发的任务流程，例如“做事故排查”“补测试”“做安全改动”。
+        </div>
+      </details>
+      <details>
+        <summary>MCP 最适合优先接哪些系统？</summary>
+        <div class="details-body">
+          优先接“经常影响代码决策”的事实源：issue、设计稿、数据库 schema、日志监控、浏览器自动化和团队文档。不要为了数量而接入。
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="page">
+      <strong>Vibe Coding Workshop</strong>
+      <p>
+        教学核心：让 AI 读真实上下文，使用团队 Skills，连接 MCP 事实源，通过验证闭环交付可审查的软件改动。
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const buttons = document.querySelectorAll("[data-filter]");
+    const scenarios = document.querySelectorAll("[data-category]");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.filter;
+        buttons.forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+
+        scenarios.forEach((scenario) => {
+          const categories = scenario.dataset.category.split(" ");
+          const visible = filter === "all" || categories.includes(filter);
+          scenario.hidden = !visible;
+        });
+      });
+    });
+
+    document.querySelectorAll("[data-copy]").forEach((block) => {
+      const button = document.createElement("button");
+      button.className = "copy-button";
+      button.type = "button";
+      button.textContent = "复制";
+      button.addEventListener("click", async () => {
+        const text = block.innerText.replace("复制", "").trim();
+        try {
+          await navigator.clipboard.writeText(text);
+          button.textContent = "已复制";
+          window.setTimeout(() => {
+            button.textContent = "复制";
+          }, 1400);
+        } catch (error) {
+          button.textContent = "手动复制";
+        }
+      });
+      block.appendChild(button);
+    });
+  </script>
+</body>
+</html>
